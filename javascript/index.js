@@ -152,9 +152,18 @@ makeBroccoli();
 
 // Bonus 2 - Promise all
 
-// function obtainInstruction("brusselsSprouts", 0) {
-// Promise.all([step0, step1, step2, step3, step4, step5]).then((step) => {
-//   document.querySelector("brusselsSprouts").innerHTML += `<li>${step}</li>`;
-//   return obtainInstruction("brusselsSprouts", 1);
-// });
-// }
+const instructions = [];
+
+for (let i = 0; i < brusselsSprouts.length; i++) {
+  instructions.push(obtainInstruction("brusselsSprouts", i));
+}
+
+Promise.all(instructions).then((instruction) => {
+  instruction.forEach((step) => {
+    document.querySelector("#brusselsSprouts").innerHTML += `<li>${step}</li>`;
+    document.querySelector(
+      "#brusselsSprouts"
+    ).innerHTML += `<li>Brussels Sprouts are ready!</li>`;
+    document.querySelector("#brusselsSproutsImg").removeAttribute("hidden");
+  });
+});
